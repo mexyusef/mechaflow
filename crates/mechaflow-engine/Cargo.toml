@@ -1,0 +1,39 @@
+[package]
+name = "mechaflow-engine"
+version.workspace = true
+authors.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "Workflow engine for MechaFlow automation system"
+keywords = ["automation", "industrial", "workflow", "rules", "state-machine"]
+categories = ["embedded", "hardware-support", "science"]
+
+[dependencies]
+# Internal dependencies
+mechaflow-core = { workspace = true }
+mechaflow-devices = { workspace = true }
+
+# Async runtime
+tokio = { workspace = true }
+futures = { workspace = true }
+
+# Serialization
+serde = { workspace = true }
+serde_json = { workspace = true }
+
+# Logging and diagnostics
+tracing = { workspace = true }
+
+# Error handling
+thiserror = { workspace = true }
+anyhow = { workspace = true }
+
+# Utilities
+async-trait = "0.1"
+chrono = { workspace = true }
+uuid = { workspace = true }
+
+[dev-dependencies]
+tokio-test = "0.4"
+test-log = { version = "0.2", features = ["trace"] }

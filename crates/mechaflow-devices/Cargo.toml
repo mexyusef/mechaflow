@@ -1,0 +1,51 @@
+[package]
+name = "mechaflow-devices"
+version.workspace = true
+authors.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "Device abstraction and protocol implementations for MechaFlow"
+keywords = ["automation", "industrial", "iot", "protocol", "device"]
+categories = ["embedded", "hardware-support", "science"]
+
+[dependencies]
+# Internal dependencies
+mechaflow-core = { workspace = true }
+
+# Async runtime
+tokio = { workspace = true }
+futures = { workspace = true }
+
+# Serialization
+serde = { workspace = true }
+serde_json = { workspace = true }
+
+# Logging and diagnostics
+tracing = { workspace = true }
+
+# Error handling
+thiserror = { workspace = true }
+anyhow = { workspace = true }
+
+# Utilities
+bytes = { workspace = true }
+
+# Protocol-specific dependencies
+tokio-modbus = { version = "0.8", optional = true }
+rumqttc = { version = "0.21", optional = true }
+opcua = { version = "0.11", optional = true }
+serialport = { version = "4.2", optional = true }
+rppal = { version = "0.14", optional = true, features = ["hal"] }
+
+[features]
+default = ["modbus", "mqtt"]
+modbus = ["dep:tokio-modbus"]
+mqtt = ["dep:rumqttc"]
+opcua = ["dep:opcua"]
+serial = ["dep:serialport"]
+gpio = ["dep:rppal"]
+
+[dev-dependencies]
+tokio-test = "0.4"
+test-log = { version = "0.2", features = ["trace"] }

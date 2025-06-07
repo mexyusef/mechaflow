@@ -1,0 +1,46 @@
+[package]
+name = "pymechaflow"
+version.workspace = true
+authors.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "Python bindings for MechaFlow automation system"
+keywords = ["automation", "industrial", "python", "bindings", "iot"]
+categories = ["embedded", "hardware-support", "science"]
+
+[lib]
+name = "pymechaflow"
+crate-type = ["cdylib"]
+
+[dependencies]
+# Internal dependencies
+mechaflow-core = { workspace = true }
+mechaflow-devices = { workspace = true }
+mechaflow-engine = { workspace = true }
+
+# Python bindings
+pyo3 = { version = "0.19", features = ["extension-module"] }
+
+# Async runtime
+tokio = { workspace = true }
+futures = { workspace = true }
+
+# Serialization
+serde = { workspace = true }
+serde_json = { workspace = true }
+
+# Logging and diagnostics
+tracing = { workspace = true }
+
+# Error handling
+thiserror = { workspace = true }
+anyhow = { workspace = true }
+
+# Utilities
+async-trait = "0.1"
+chrono = { workspace = true }
+uuid = { workspace = true }
+
+[build-dependencies]
+pyo3-build-config = "0.19"

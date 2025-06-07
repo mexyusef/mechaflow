@@ -1,0 +1,73 @@
+[workspace]
+name = "mechaflow"
+resolver = "2"
+members = [
+    "crates/mechaflow-core",
+    "crates/mechaflow-devices",
+    "crates/mechaflow-engine",
+    "crates/mechaflow-cli",
+    "pymechaflow",
+]
+
+[workspace.package]
+version = "0.0.1"
+authors = ["Yusef Ulum"]
+edition = "2021"
+license = "MIT"
+repository = "https://github.com/mexyusef/mechaflow"
+readme = "README.md"
+description = "A high-performance hybrid Rust-Python library for automation, robotics, and logistics systems"
+keywords = ["automation", "industrial", "iot", "robotics", "workflow"]
+categories = ["embedded", "hardware-support", "science"]
+
+[workspace.dependencies]
+# Async runtime
+tokio = { version = "1.29", features = ["full"] }
+futures = "0.3"
+
+# Serialization
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+toml = "0.7"
+yaml-rust = "0.4"
+
+# Logging and diagnostics
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+
+# Error handling
+thiserror = "1.0"
+anyhow = "1.0"
+
+# Configuration
+config = "0.13"
+
+# Utilities
+bytes = "1.4"
+chrono = { version = "0.4", features = ["serde"] }
+uuid = { version = "1.4", features = ["v4", "serde"] }
+
+# Inter-crate dependencies
+mechaflow-core = { path = "crates/mechaflow-core", version = "0.0.1" }
+mechaflow-devices = { path = "crates/mechaflow-devices", version = "0.0.1" }
+mechaflow-engine = { path = "crates/mechaflow-engine", version = "0.0.1" }
+
+[profile.dev]
+opt-level = 0
+debug = true
+
+[profile.release]
+opt-level = 3
+debug = false
+lto = "thin"
+codegen-units = 1
+panic = "abort"
+
+[profile.test]
+opt-level = 0
+debug = true
+
+[profile.bench]
+opt-level = 3
+debug = false
+lto = "thin"
